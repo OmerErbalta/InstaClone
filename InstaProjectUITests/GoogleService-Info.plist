@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyA7zfyzHIc2kHFxRs8mUQziSwNXtSlGh0g</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1020763966255</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>omerErbalta.InstaProject</string>
+	<key>PROJECT_ID</key>
+	<string>instagramswiftui-46da0</string>
+	<key>STORAGE_BUCKET</key>
+	<string>instagramswiftui-46da0.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1020763966255:ios:71b94c2feae8e18b362fda</string>
+</dict>
+</plist>
