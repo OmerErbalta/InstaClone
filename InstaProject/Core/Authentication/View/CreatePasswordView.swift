@@ -21,7 +21,7 @@ struct CreatePasswordView: View {
                     .fontWeight(.bold)
                     .padding(.top)
                 
-                Text("Pick a password for your new account yo can always change it later")
+                Text("Your password must be at least 6 charachters in lenght")
                     .font(.subheadline)
                     .foregroundStyle(.gray)
                     .multilineTextAlignment(.center)
@@ -29,10 +29,12 @@ struct CreatePasswordView: View {
                 
                 SecureField("Password", text: $password)
                     .modifier(IGTextFieldModifier())
+                    .padding(.top,15)
+
                 
-                Button(action: {
-                    print("Go to pasword")
-                }, label: {
+                NavigationLink{
+                    CompleteSignUpvView()
+                }label: {
                     Text("Next")
                         .frame( maxWidth: .infinity,alignment: .center)
                         .frame(width: Const.width * 0.9 ,height: 50)
@@ -40,9 +42,7 @@ struct CreatePasswordView: View {
                         .fontWeight(.semibold)
                         .background(Color.blue)
                         .foregroundStyle(.white)
-                    
-                    
-                })
+                }
                 .clipShape(.rect(cornerRadius: 10))
                 .padding(.vertical ,10)
                 Spacer()
