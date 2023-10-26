@@ -14,8 +14,8 @@ struct FeedView: View {
                 //Post List
                 
                 LazyVStack(spacing:20) {
-                    ForEach(0...15,id:\.self){index in
-                        FeedCell()
+                    ForEach(Post.MOCK_POSTS ,id: \.id){post in
+                        FeedCell(post:post)
                     }
                     .padding(.top,30)
                 }
@@ -32,7 +32,7 @@ struct FeedView: View {
                     })
                 }
                 ToolbarItem(placement: .topBarLeading) {
-                    Text("Instagram").font(.title).fontWeight(.bold)
+                    Text("Erbalta").font(.title).fontWeight(.bold)
                 }
             }
         }
