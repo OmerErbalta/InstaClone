@@ -12,9 +12,12 @@ struct FeedCell: View {
     @StateObject var contentViewModel = ContentViewModel()
     @State var post : Post
     @State var postLiked :Bool
+    @State var diffrenceTime:String
     init(post:Post) {
         self.post = post
         self.postLiked = FeedCellViewModel().checkPostLiked(post: post)
+        self.diffrenceTime = FeedCellViewModel().calculateTimeDifference(date: post.timeStap)
+        
     }
     var body: some View {
         VStack{
@@ -98,7 +101,7 @@ struct FeedCell: View {
                 .font(.footnote)
                 .padding(.top,2)
                 
-            Text("4h").font(.footnote).opacity(0.5)
+            Text(diffrenceTime ).font(.footnote).opacity(0.5)
                 .frame(maxWidth: .infinity,alignment: .leading)
                 .padding(.leading,10)
             

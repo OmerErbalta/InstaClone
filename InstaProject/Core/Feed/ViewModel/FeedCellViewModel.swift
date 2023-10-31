@@ -10,8 +10,26 @@ import Firebase
 class FeedCellViewModel:ObservableObject{
 
 
-    func checkPostLiked(post:Post) -> Bool{
+    func calculateTimeDifference(date:Timestamp)-> String{
+        var time = date.dateValue()
+        let timeDifference = Calendar.current.dateComponents([.day,.hour,.minute], from: time,to: Date())
+        print(timeDifference)
         
+        if let day = timeDifference.day, day >= 1 {
+            return "\(day) d"
+        }
+        
+        if let hours = timeDifference.hour, hours >= 1 {
+            return "\(hours) h"
+        }
+        else if let minute = timeDifference.minute {
+            return "\(minute) m"
+        }
+        
+        return ""
+        
+    }
+    func checkPostLiked(post:Post) -> Bool{
         let userId = AuthService.shared.currentUser?.id
         if((post.likedList?.contains(userId!)) == true ){
             return true
