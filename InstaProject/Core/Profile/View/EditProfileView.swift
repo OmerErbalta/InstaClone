@@ -10,10 +10,10 @@ import PhotosUI
 
 struct EditProfileView: View {
     @Environment(\.dismiss) var dismiss
-    @State var user : User
-    @State private var selectedImage : PhotosPickerItem?
-    @State private var name = ""
-    @State private var bio = ""
+    @StateObject var viewModel : EditProfileViewModel
+    init(user:User) {
+        self._viewModel = StateObject(wrappedValue: EditProfileViewModel(user: user))
+    }
     var body: some View {
         
         VStack{
@@ -31,7 +31,10 @@ struct EditProfileView: View {
                 Spacer()
                 
                 Button("Done"){
-                    dismiss()
+                    Task{
+                      try await  viewModel.updateUserData()
+                        dismiss()
+                    }
                 }
                 .font(.headline)
                 .fontWeight(.bold)
@@ -42,12 +45,19 @@ struct EditProfileView: View {
         
             
             
-            PhotosPicker(selection: $selectedImage) {
+            PhotosPicker(selection: $viewModel.selectedItem) {
                 VStack {
-                    Image(user.profileImageUrl ?? "personImage")
-                        .resizable()
-                        .frame(width: 80,height: 80)
-                    .clipShape(.circle)
+                    if let image = viewModel.profileImage{
+                        image
+                            .resizable()
+                            .frame(width: 80,height: 80)
+                        .clipShape(.circle)
+                        
+                    }
+                    else{
+                        CircleProfileImage(user: viewModel.user,size: .lage)
+                        
+                    }
                     
                     Text("Edit Profile Image")
                         .font(.footnote)
@@ -65,8 +75,8 @@ struct EditProfileView: View {
             
         
             
-            EditProfileRow(title: "Name", placeholder: "Enter your name..", text: $name)
-            EditProfileRow(title: "Bio", placeholder: "Enter your bio..", text: $bio)
+            EditProfileRow(title: "Name", placeholder: "Enter your name..", text: $viewModel.fullName)
+            EditProfileRow(title: "Bio", placeholder: "Enter your bio..", text: $viewModel.bio)
             
             Spacer()
             
@@ -75,7 +85,7 @@ struct EditProfileView: View {
 }
 
 #Preview {
-    EditProfileView( user: User(id: "", email: "", username: "", password: "") )
+    EditProfileView( user: User.MOCK_USER.first! )
 }
 
 struct EditProfileRow: View {

@@ -9,24 +9,25 @@ import SwiftUI
 
 struct SerachView: View {
     @State private var  searchText = ""
+    @StateObject var viewModel = SerachViewModel()
+    @StateObject var contentViewModel = ContentViewModel()
     var body: some View {
         NavigationStack {
             ScrollView{
                 //history users
                 LazyVStack(spacing:15){
-                    ForEach(User.MOCK_USER){user in
-                        if user.email != AuthService.shared.userSession?.email{
-                            //user
+                    ForEach(viewModel.users){user in
+                        //user
+                        if user.email != contentViewModel.currentUser?.email{
+                            
                             NavigationLink{
-                                ProfileView(user: user, userView: .CurrentUserView, posts: Post.MOCK_POSTS)
+                                
+                                ProfileView(user: user, userView: .OthherProfileView)
+                                
                             }label: {
                             label: do {
                                 HStack(){
-                                    Image(user.profileImageUrl ?? "")
-                                        .resizable()
-                                        .frame(width: 40,height: 40)
-                                        .clipShape(.circle)
-                                        .opacity(0.9)
+                                    CircleProfileImage(user: user, size: .small)
                                     
                                     VStack (alignment:.leading){
                                         Text(user.username).fontWeight(.semibold).opacity(0.85)
@@ -42,8 +43,8 @@ struct SerachView: View {
                             }
                             }
                         }
+                        
                     }
-                    
                 }
                 .padding(.top,15)
                 .searchable(text: $searchText,prompt: "Search...")
@@ -53,8 +54,4 @@ struct SerachView: View {
             
         }
     }
-}
-
-#Preview {
-    SerachView()
 }

@@ -9,19 +9,14 @@ import SwiftUI
 
 
 struct ProfileHeaderView: View {
-    @State var user : User
+    let user : User
     @State var showEditProfile = false
-    @State var userView : Const.UsersView
-    
+    let userView : Const.UsersView
     var body: some View {
         VStack(alignment:.leading){
             //pic and stats
             HStack(alignment:.center){
-                Image(user.profileImageUrl ?? "personImage")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width:80,height:80)
-                    .clipShape(.circle)
+                CircleProfileImage(user: user,size: .medium)
                 UserStatView(value: 0, title: "Posts")
                 UserStatView(value: user.fallower, title: "Followers")
                 UserStatView(value: user.fallowing, title: "Following")

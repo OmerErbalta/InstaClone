@@ -6,20 +6,27 @@
 //
 
 import SwiftUI
-
+import Kingfisher
 struct FeedCell: View {
-    let post : Post
+    @StateObject var viewModel = FeedCellViewModel()
+    @StateObject var contentViewModel = ContentViewModel()
+    @State var post : Post
+    @State var postLiked :Bool
+    init(post:Post) {
+        self.post = post
+        self.postLiked = FeedCellViewModel().checkPostLiked(post: post)
+    }
     var body: some View {
         VStack{
             //User Info
             HStack{
                 if let user = post.user{
-                    CircleProfileImage(user: user, size: .small)
+                    CircleProfileImage(user: user, size: .xsmall)
                     VStack(alignment:.leading) {
-                        Text(post.user?.username ?? "User")
+                        Text(user.username)
                             .font(.subheadline)
                             .fontWeight(.semibold)
-                        Text(post.user?.fullName ?? "fullname")
+                        Text(user.fullName ?? "")
                             .font(.callout)
                             .foregroundStyle(.black)
                             .opacity(0.4)
@@ -31,7 +38,7 @@ struct FeedCell: View {
                 
             }.padding(.leading,10)
             //Post
-            Image(post.ımageUrl)
+            KFImage(URL(string: post.ımageUrl))
                 .resizable()
                 .frame(width: Const.width , height: Const.height * 0.4)
                 .scaledToFill()
@@ -40,9 +47,25 @@ struct FeedCell: View {
             
             // action buttons
             HStack(spacing:15){
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Image(systemName: "heart")
-                        .imageScale(.large)
+                Button(action: {
+                    Task{
+                        if let userId = AuthService.shared.currentUser?.id {
+                            (post:self.post,liked:postLiked) =  try await viewModel.likedPost(post: post, userId:userId)
+                        }
+                    }
+                }, label: {
+                    if postLiked{
+                        Image(systemName: "heart.fill")
+                            .imageScale(.large)
+                            .foregroundStyle(.red)
+                    }
+                    else{
+                        Image(systemName: "heart")
+                            .imageScale(.large)
+                            
+                    }
+                   
+                    
                 })
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                     Image(systemName: "bubble.right")
@@ -58,7 +81,7 @@ struct FeedCell: View {
             .foregroundStyle(.black)
 
             //like label
-            Text("\(post.likes) likes")
+            Text("\(post.likedList?.count ?? 0) likes")
                 .font(.footnote)
                 .fontWeight(.semibold)
                 .frame(maxWidth: .infinity,alignment: .leading)

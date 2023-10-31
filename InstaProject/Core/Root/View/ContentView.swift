@@ -8,8 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var viewModel = ContentViewModel()
+    @StateObject var registirationViewModel = RegistirationViewModel()
+   
     var body: some View {
-        MainTabView()
+        Group{
+            if viewModel.currentUser == nil{
+                LoginView()
+                    .environmentObject(registirationViewModel)
+                
+            }
+            else if let currentUser = viewModel.currentUser{
+                MainTabView(user: currentUser)
+            }
+        }
     }
 }
 

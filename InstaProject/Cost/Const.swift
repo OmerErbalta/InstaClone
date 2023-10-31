@@ -10,4 +10,9 @@ import UIKit
 class Const{
     static let width = UIScreen.main.bounds.width
     static let height = UIScreen.main.bounds.height
+    
+    enum UsersView{
+        case UserView
+        case OthherProfileView
+    }
 }
