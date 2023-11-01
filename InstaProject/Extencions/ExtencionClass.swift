@@ -8,13 +8,11 @@
 import Foundation
 import Firebase
 
-class Extencions{
+class ExtencionsClass{
     
-    func calculateTimeDifference(date:Timestamp)-> String{
+   static func calculateTimeDifference(date:Timestamp)-> String{
         let time = date.dateValue()
-        let timeDifference = Calendar.current.dateComponents([.day,.hour,.minute], from: time,to: Date())
-        print(timeDifference)
-        
+        let timeDifference = Calendar.current.dateComponents([.day,.hour,.minute], from: time,to: Date())        
         if let day = timeDifference.day, day >= 1 {
             return "\(day) d"
         }

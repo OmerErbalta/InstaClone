@@ -30,6 +30,7 @@ class FeedViewModel: ObservableObject{
             let ownerUid = posts[i].ownerUuid
             let postUser = try await UserService.fetcUser(withUid: ownerUid)
             posts[i].user = postUser
+            
         }
         
     }

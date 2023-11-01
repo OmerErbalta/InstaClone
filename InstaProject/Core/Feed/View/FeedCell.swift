@@ -13,10 +13,11 @@ struct FeedCell: View {
     @State var post : Post
     @State var postLiked :Bool
     @State var diffrenceTime:String
+    @State private var showingComment = false
     init(post:Post) {
         self.post = post
         self.postLiked = FeedCellViewModel().checkPostLiked(post: post)
-        self.diffrenceTime = FeedCellViewModel().calculateTimeDifference(date: post.timeStap)
+        self.diffrenceTime = ExtencionsClass.calculateTimeDifference(date: post.timeStap)
         
     }
     var body: some View {
@@ -70,10 +71,17 @@ struct FeedCell: View {
                    
                     
                 })
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                Button(action: {
+                    showingComment = true
+                    
+                }, label: {
                     Image(systemName: "bubble.right")
                         .imageScale(.large)
                 })
+                .sheet(isPresented: $showingComment) {
+                    CommentBottomSheet(post: post)
+                        .presentationDetents([.large,.medium])
+                }
                 Button(action: {}, label: {
                     Image(systemName: "paperplane")
                         .imageScale(.large)

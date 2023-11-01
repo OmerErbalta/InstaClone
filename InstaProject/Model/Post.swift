@@ -18,12 +18,14 @@ struct Post : Identifiable,Codable{
     let timeStap : Timestamp
     var user : User?
     var likedList: [String]?
+    var commentList : [Comment]?
 }
 
 extension Post{
     static var MOCK_POSTS: [Post] = [
-        .init(id: UUID().uuidString, ownerUuid: UUID().uuidString, caption: "HATA", likes: 0, ımageUrl: "", timeStap: Timestamp(), user: User.MOCK_USER[0]),
+        .init(id: UUID().uuidString, ownerUuid: UUID().uuidString, caption: "HATA", likes: 0, ımageUrl: "", timeStap: Timestamp(), user: User.MOCK_USER[0],commentList:Comment.MOCK_COMMENT)
         
+        ,
         .init(
             id: UUID().uuidString,
             ownerUuid: UUID().uuidString,
@@ -32,6 +34,7 @@ extension Post{
             ımageUrl: "profilePhoto",
             timeStap: Timestamp(),
             user: User.MOCK_USER[0]),
+        
         .init(
             id: UUID().uuidString,
             ownerUuid: UUID().uuidString,
