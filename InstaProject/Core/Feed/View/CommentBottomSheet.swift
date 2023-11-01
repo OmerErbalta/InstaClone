@@ -9,26 +9,50 @@ import SwiftUI
 
 struct CommentBottomSheet: View {
     @StateObject var viewModel : CommentViewModel
+    @State var CommentText = ""
+    @State var post : Post
     init(post: Post) {
+        self.post = post
         self._viewModel = StateObject(wrappedValue: CommentViewModel(post:post))
-        
     }
     var body: some View {
-        ScrollView{
-            VStack{
-                ForEach(viewModel.comments){comment in
-                    if comment.user != nil{
-                        CommentView(comment: comment)
+        VStack {
+            ScrollView{
+                VStack{
+                    ForEach(viewModel.comments){comment in
+                        if comment.user != nil{
+                            CommentView(comment: comment)
+                        }
                     }
+                    /*
+                    ForEach(0..<10){index in
+                        CommentView(comment: Comment.MOCK_COMMENT[0])
+                    }*/
+                     
                 }
-                
-               /* ForEach(0..<10){index in
-                    CommentView(comment: Comment.MOCK_COMMENT[0])
-                }*/
-                 
+                .padding(.all,20)
             }
-            .padding(.all,20)
+            HStack{
+                TextField("Add Commit...", text: $CommentText)
+                    .modifier(IGTextFieldModifier())
+                Button(action: {
+                    Task{
+                       try await viewModel.addComment(post:self.post,commentString:CommentText)
+                        CommentText = ""
+                       try await viewModel.fetchComments(postId: self.post.id)
+                    }
+                }, label: {
+                    Image(systemName: "paperplane.circle.fill")
+                        .resizable()
+                        .frame(width: 30,height: 30)
+                        .padding(.trailing,10)
+                })
+            }
+            
+            
+            
         }
+        
     }
 }
 
@@ -44,7 +68,7 @@ struct CommentView:View {
             if let user = comment.user{
                 HStack {
                     CircleProfileImage(user: user, size: .xsmall)
-                    VStack(alignment:.leading,spacing: 5) {
+                    VStack(alignment:.leading,spacing: 3) {
                         HStack() {
                             Text(user.username)
                                 .font(.footnote)
@@ -54,11 +78,15 @@ struct CommentView:View {
                                 .font(.footnote)
                                 .fontWeight(.semibold)
                         }
+                        .padding(.bottom,5)
                         Text(comment.comment)
+
                             .font(.caption)
-                            .fontWeight(.medium)
-                            .frame(width: Const.width * 0.7)
+                            .fontWeight(.regular)
+                            .frame(alignment: .leading)
                             
+                            
+                        
                             
                     }
                     Spacer()
