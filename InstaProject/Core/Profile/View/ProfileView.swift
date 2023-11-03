@@ -9,14 +9,13 @@ import SwiftUI
 
 struct ProfileView: View {
     var user : User
-    let userView : Const.UsersView
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack{
                     
                     //header
-                    ProfileHeaderView(user: user,userView : self.userView)
+                    ProfileHeaderView(user: user)
                     
                     Divider()
                     
@@ -27,22 +26,27 @@ struct ProfileView: View {
             .navigationTitle("Profile")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
-                if userView == .UserView{
                     ToolbarItem( placement: .topBarTrailing) {
                         Button(action: {
-                            AuthService.shared.signOut()
+                            if self.user.id == AuthService.shared.currentUser?.id{
+                                AuthService.shared.signOut()
+                            }
+                            else{
+                                print("other profile View ")
+                            }
+                           
                         }, label: {
                             Image( systemName: "line.3.horizontal")
                                 .foregroundStyle(.black)
                         })
                     }
-                }
+                
             }
         }
     }
 }
 
 #Preview {
-    ProfileView(user: User.MOCK_USER.first!, userView: .UserView)
+    ProfileView(user: User.MOCK_USER.first!)
 }
 

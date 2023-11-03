@@ -11,7 +11,16 @@ import SwiftUI
 struct ProfileHeaderView: View {
     let user : User
     @State var showEditProfile = false
-    let userView : Const.UsersView
+    var userType : Const.UsersView
+    init(user:User) {
+        self.user = user
+        if user.id == AuthService.shared.currentUser?.id{
+            userType = .UserView
+        }
+        else{
+            userType = .OthherProfileView
+        }
+    }
     var body: some View {
         VStack(alignment:.leading){
             //pic and stats
@@ -40,23 +49,23 @@ struct ProfileHeaderView: View {
             
             //action Button
             Button(action: {
-                if userView == .UserView{
+                if userType == .UserView{
                     showEditProfile.toggle()
                 }
-                else if userView == .OthherProfileView{
+                else {
                     
                 }
             }, label: {
-                Text(userView  == .UserView ? "Edit Profile" : "Fallow")
+                Text(userType == .UserView ? "Edit Profile" : "Fallow")
             })
             .frame(width:Const.width * 0.9,height: 35 )
             .fontWeight(.semibold)
-            .foregroundStyle(userView == .UserView ? .black : .white)
-            .background(userView == .UserView ? .white : Color(.systemBlue))
+            .foregroundStyle(userType == .UserView ? .black : .white)
+            .background(userType == .UserView ? .white : Color(.systemBlue))
             .clipShape(.rect(cornerRadius: 10))
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(userView == .UserView ? .gray : .clear ,lineWidth: 1))
+                    .stroke(userType == .UserView ? .gray : .clear ,lineWidth: 1))
             .padding(.horizontal)
         }
         .fullScreenCover(isPresented: $showEditProfile){
@@ -68,5 +77,5 @@ struct ProfileHeaderView: View {
 }
 
 #Preview {
-    ProfileHeaderView(user: User.MOCK_USER.first!, userView: .UserView)
+    ProfileHeaderView(user: User.MOCK_USER.first!)
 }

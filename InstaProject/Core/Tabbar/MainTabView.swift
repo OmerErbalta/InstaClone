@@ -49,7 +49,7 @@ struct MainTabView: View {
                 .tag(3)
             
             
-            ProfileView(user: user  , userView: .UserView)
+            ProfileView(user: user  )
                 .onAppear{
                     tabViewIndex = 4
                 }

@@ -21,20 +21,25 @@ struct FeedCell: View {
         
     }
     var body: some View {
+        
         VStack{
             //User Info
             HStack{
                 if let user = post.user{
-                    CircleProfileImage(user: user, size: .xsmall)
-                    VStack(alignment:.leading) {
-                        Text(user.username)
-                            .font(.subheadline)
-                            .fontWeight(.semibold)
-                        Text(user.fullName ?? "")
-                            .font(.callout)
-                            .foregroundStyle(.black)
-                            .opacity(0.4)
-                        
+                    NavigationLink{
+                        ProfileView(user: user)
+                    }label: {
+                        CircleProfileImage(user: user, size: .xsmall)
+                        VStack(alignment:.leading) {
+                            Text(user.username)
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                            Text(user.fullName ?? "")
+                                .font(.callout)
+                                .foregroundStyle(.black)
+                                .opacity(0.4)
+                            
+                        }
                     }
                 }
                 

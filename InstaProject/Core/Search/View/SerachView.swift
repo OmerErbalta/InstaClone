@@ -22,7 +22,7 @@ struct SerachView: View {
                             
                             NavigationLink{
                                 
-                                ProfileView(user: user, userView: .OthherProfileView)
+                                ProfileView(user: user)
                                 
                             }label: {
                             label: do {
