@@ -36,10 +36,10 @@ struct FeedCell: View {
                                 .fontWeight(.semibold)
                             Text(user.fullName ?? "")
                                 .font(.callout)
-                                .foregroundStyle(.black)
                                 .opacity(0.4)
                             
                         }
+                        .foregroundStyle(.black)
                     }
                 }
                 
@@ -56,36 +56,48 @@ struct FeedCell: View {
             
             // action buttons
             HStack(spacing:15){
-                Button(action: {
-                    Task{
-                        if let userId = AuthService.shared.currentUser?.id {
-                            (post:self.post,liked:postLiked) =  try await viewModel.likedPost(post: post, userId:userId)
+                VStack{
+                    Button(action: {
+                        Task{
+                            if let userId = AuthService.shared.currentUser?.id {
+                                (post:self.post,liked:postLiked) =  try await viewModel.likedPost(post: post, userId:userId)
+                            }
                         }
-                    }
-                }, label: {
-                    if postLiked{
-                        Image(systemName: "heart.fill")
+                    }, label: {
+                        if postLiked{
+                            Image(systemName: "heart.fill")
+                                .imageScale(.large)
+                                .foregroundStyle(.red)
+                        }
+                        else{
+                            Image(systemName: "heart")
+                                .imageScale(.large)
+                                
+                        }
+                        
+                    })
+                    Text("\(post.likedList?.count ?? 0)")
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                }
+                VStack{
+                    Button(action: {
+                        showingComment = true
+                        
+                    }, label: {
+                        Image(systemName: "bubble.right")
                             .imageScale(.large)
-                            .foregroundStyle(.red)
+                       
+                    })
+                    .sheet(isPresented: $showingComment) {
+                        CommentBottomSheet(post: post)
+                            .presentationDetents([.large,.medium])
                     }
-                    else{
-                        Image(systemName: "heart")
-                            .imageScale(.large)
-                            
-                    }
-                   
                     
-                })
-                Button(action: {
-                    showingComment = true
-                    
-                }, label: {
-                    Image(systemName: "bubble.right")
-                        .imageScale(.large)
-                })
-                .sheet(isPresented: $showingComment) {
-                    CommentBottomSheet(post: post)
-                        .presentationDetents([.large,.medium])
+                    Text("\(post.commentCount ?? 0)")
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                       
                 }
                 Button(action: {}, label: {
                     Image(systemName: "paperplane")
@@ -97,12 +109,7 @@ struct FeedCell: View {
             .foregroundStyle(.black)
 
             //like label
-            Text("\(post.likedList?.count ?? 0) likes")
-                .font(.footnote)
-                .fontWeight(.semibold)
-                .frame(maxWidth: .infinity,alignment: .leading)
-                .padding(.leading,8)
-                .padding(.top,2)
+           
             // caption label
             
             HStack {

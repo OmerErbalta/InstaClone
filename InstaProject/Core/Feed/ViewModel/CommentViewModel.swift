@@ -27,8 +27,8 @@ class CommentViewModel:ObservableObject{
             let userId = comments[i].userId
             let commentUser = try await UserService.fetcUser(withUid: userId)
             self.comments[i].user = commentUser
-            
         }
+        
     }
     
     func addComment(post:Post,commentString:String) async throws {
@@ -37,6 +37,11 @@ class CommentViewModel:ObservableObject{
         let comment = Comment(id: commentRef.documentID, comment: commentString, timeStap: Timestamp(), userId: userId ?? "")
         guard let encoderComment = try? Firestore.Encoder().encode(comment) else{return}
         try await commentRef.setData(encoderComment)
+        
+        var data = [String:Any]()
+        data["commentCount"] = self.comments.count + 1
+        try await Firestore.firestore().collection("posts").document(post.id).updateData(data)
+        
         
     }
 }
