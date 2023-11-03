@@ -9,7 +9,7 @@ import SwiftUI
 import Kingfisher
 struct PostGridView: View {
     @StateObject var viewModel : PostGridViewModel
-    
+    var postCount = 0
     init(user:User){
         self._viewModel = StateObject(wrappedValue: PostGridViewModel(user: user))
     }

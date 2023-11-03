@@ -16,6 +16,7 @@ struct User:Identifiable,Codable{
     var fullName : String?
     var fallowing : Int = 0
     var fallower : Int = 0
+    var postCount : Int? = 0
     var bio : String?
     
     

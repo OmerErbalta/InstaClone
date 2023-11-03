@@ -36,12 +36,18 @@ class UploadPostViewModel : ObservableObject{
         guard let uiImage = uiImage else {return}
         guard let imageUrl = try await ImageUploder.imageUpload(image: uiImage) else {return}
         let postRef = Firestore.firestore().collection("posts").document()
-        
         let post = Post(id: postRef.documentID, ownerUuid: uid, caption: caption, commentCount: 0, ımageUrl: imageUrl, timeStap: Timestamp())
-        
         guard let encoderPost = try? Firestore.Encoder().encode(post) else{return}
-        
         try await postRef.setData(encoderPost)
+        
+        var data = [String:Any]()
+        if let postCount = AuthService.shared.currentUser?.postCount{
+            data["postCount"] = postCount  + 1
+        }
+        else{
+            data["postCount"] = 1
+        }
+        try await Firestore.firestore().collection("users").document(uid).updateData(data)
         
     }
     

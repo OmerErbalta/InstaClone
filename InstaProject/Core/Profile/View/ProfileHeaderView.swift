@@ -11,6 +11,7 @@ import SwiftUI
 struct ProfileHeaderView: View {
     let user : User
     @State var showEditProfile = false
+      var  postCount = 0
     var userType : Const.UsersView
     init(user:User) {
         self.user = user
@@ -26,7 +27,7 @@ struct ProfileHeaderView: View {
             //pic and stats
             HStack(alignment:.center){
                 CircleProfileImage(user: user,size: .medium)
-                UserStatView(value: 0, title: "Posts")
+                UserStatView(value: user.postCount ?? 0, title: "Posts")
                 UserStatView(value: user.fallower, title: "Followers")
                 UserStatView(value: user.fallowing, title: "Following")
                 
