@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Chat: View {
+struct ChatView: View {
     @State var message = ""
     @State var user : User
     @State var messageList = [Message]()
@@ -61,7 +61,9 @@ struct Chat: View {
                     
                 }
                 .foregroundStyle(.black)
-            }.padding(.trailing,Const.width * 0.1)
+            }
+            .frame(width: Const.width * 0.4)
+            .padding(.trailing,Const.width * 0.15)
             NavigationLink{
                 
             }label: {
@@ -74,6 +76,6 @@ struct Chat: View {
 }
 
 #Preview {
-    Chat(user: User.MOCK_USER[1])
+    ChatView(user: User.MOCK_USER[1])
 }
 
