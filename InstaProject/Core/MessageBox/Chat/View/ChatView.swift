@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import Firebase
 struct ChatView: View {
     @State var message = ""
     @State var user : User
@@ -36,9 +36,10 @@ struct ChatView: View {
                             let sendedMessage = Message(id: UUID().uuidString, message:message, user:user.id)
                             messageList.append(sendedMessage)
                             Task{
-                                viewModel.checkChat(user:user)
+                                try await viewModel.sendToMessage(user:user,message: message)
+                                message = ""
                             }
-                            message = ""
+                            
                         }
                        
                         

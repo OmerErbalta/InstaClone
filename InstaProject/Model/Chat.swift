@@ -11,7 +11,7 @@ import Firebase
 struct Chat : Identifiable,Codable{
     let id :String
     var messages : [Message]?
-    let usersId : [String]
+    let usersId : [String]?
     var users:[User]?
 }
 

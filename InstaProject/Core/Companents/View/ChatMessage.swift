@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct ChatMessage: View {
     @State var message:Message

@@ -17,6 +17,7 @@ struct User:Identifiable,Codable{
     var fallowing : [String]?
     var fallower : [String]?
     var postCount : Int? = 0
+    var chatListId : [String]?
     var chatList : [Chat]?
     var bio : String?
     
