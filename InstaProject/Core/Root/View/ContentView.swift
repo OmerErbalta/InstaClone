@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var viewModel = ContentViewModel()
     @StateObject var registirationViewModel = RegistirationViewModel()
+    let viewSwitch = ViewSwitch()
    
     var body: some View {
         Group{
@@ -20,6 +21,7 @@ struct ContentView: View {
             }
             else if let currentUser = viewModel.currentUser{
                 MainTabView(user: currentUser)
+                    .environmentObject(viewSwitch)
             }
         }
     }

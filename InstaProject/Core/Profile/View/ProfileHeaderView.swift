@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ProfileHeaderView: View {
     let user : User
+    @EnvironmentObject var viewSwitch: ViewSwitch
     @State var showEditProfile = false
       var  postCount = 0
     var userType : Const.UsersView
@@ -28,8 +29,8 @@ struct ProfileHeaderView: View {
             HStack(alignment:.center){
                 CircleProfileImage(user: user,size: .medium)
                 UserStatView(value: user.postCount ?? 0, title: "Posts")
-                UserStatView(value: user.fallower, title: "Followers")
-                UserStatView(value: user.fallowing, title: "Following")
+                UserStatView(value: user.fallower?.count  ?? 0, title: "Followers")
+                UserStatView(value: user.fallowing?.count ?? 0, title: "Following")
                 
             }
             
@@ -47,31 +48,55 @@ struct ProfileHeaderView: View {
             }
             .padding(.horizontal,8)
             .frame(width: Const.width,alignment: .leading)
-            
+                
             //action Button
-            Button(action: {
-                if userType == .UserView{
-                    showEditProfile.toggle()
-                }
-                else {
+            HStack {
+                Button(action: {
+                    if userType == .UserView{
+                        showEditProfile.toggle()
+                    }
+                    else {
+                        
+                    }
+                }, label: {
+                    Text(userType == .UserView ? "Edit Profile" : "Fallow")
+                })
+                .frame(width:userType == .UserView ? Const.width * 0.9: Const.width * 0.55,height: 35 )
+                .padding(.horizontal)
+                .fontWeight(.semibold)
+                .foregroundStyle(userType == .UserView ? .black : .white)
+                .background(userType == .UserView ? .white : Color(.systemBlue))
+                .clipShape(.rect(cornerRadius: 10))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(userType == .UserView ? .gray : .clear ,lineWidth: 1))
+                if userType == .OthherProfileView{
+                    NavigationLink {
+                        ChatView(user:self.user)
+                    }label: {
+                        Text("Mesaj")
+                    }
+                    .frame(width:Const.width * 0.3,height: 35 )
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.black)
+                    .clipShape(.rect(cornerRadius: 10))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(.gray ,lineWidth: 1))
+                    
                     
                 }
-            }, label: {
-                Text(userType == .UserView ? "Edit Profile" : "Fallow")
-            })
-            .frame(width:Const.width * 0.9,height: 35 )
-            .fontWeight(.semibold)
-            .foregroundStyle(userType == .UserView ? .black : .white)
-            .background(userType == .UserView ? .white : Color(.systemBlue))
-            .clipShape(.rect(cornerRadius: 10))
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(userType == .UserView ? .gray : .clear ,lineWidth: 1))
-            .padding(.horizontal)
+                
+            }
+            
+            
+        
         }
         .fullScreenCover(isPresented: $showEditProfile){
             EditProfileView(user: user)
         }
+       
+        
         Divider()
     }
        

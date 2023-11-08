@@ -8,6 +8,13 @@
 import Foundation
 import Firebase
 
+struct Chat : Identifiable,Codable{
+    let id :String
+    var messages : [Message]?
+    let usersId : [String]
+    var users:[User]?
+}
+
 struct Message:Identifiable,Codable {
     let id : String
     let message : String

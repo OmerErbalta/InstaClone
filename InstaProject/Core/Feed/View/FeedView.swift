@@ -9,6 +9,8 @@ import SwiftUI
 
 struct FeedView: View {
     @StateObject var viewModel = FeedViewModel()
+    @EnvironmentObject var viewSwitch: ViewSwitch
+
     var body: some View {
         NavigationStack {
             ScrollView{
@@ -33,7 +35,9 @@ struct FeedView: View {
             .toolbar{
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
-                        
+                        withAnimation(Animation.easeInOut(duration: 0.2)) {
+                        viewSwitch.changeRootView(to: .WithoutTabbed)
+                        }
                     }, label: {
                         Image(systemName: "paperplane")
                             .foregroundStyle(.black)
@@ -47,6 +51,4 @@ struct FeedView: View {
     }
 }
 
-#Preview {
-    FeedView()
-}
+

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CommentBottomSheet: View {
     @StateObject var viewModel : CommentViewModel
-    @State var CommentText = ""
+    @State var commentText = ""
     @State var post : Post
     init(post: Post) {
         self.post = post
@@ -33,12 +33,12 @@ struct CommentBottomSheet: View {
                 .padding(.all,20)
             }
             HStack{
-                TextField("Add Commit...", text: $CommentText)
+                TextField("Add Commit...", text: $commentText)
                     .modifier(IGTextFieldModifier())
                 Button(action: {
                     Task{
-                       try await viewModel.addComment(post:self.post,commentString:CommentText)
-                        CommentText = ""
+                       try await viewModel.addComment(post:self.post,commentString:commentText)
+                        commentText = ""
                        try await viewModel.fetchComments(postId: self.post.id)
                     }
                 }, label: {

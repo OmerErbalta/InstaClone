@@ -99,10 +99,15 @@ struct FeedCell: View {
                         .fontWeight(.semibold)
                        
                 }
-                Button(action: {}, label: {
-                    Image(systemName: "paperplane")
-                        .imageScale(.large)
-                })
+                VStack{
+                    Button(action: {}, label: {
+                        Image(systemName: "paperplane")
+                            .imageScale(.large)
+                    })
+                    Text("Send")
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                }
                 Spacer()
             }
             .padding(.leading,10)

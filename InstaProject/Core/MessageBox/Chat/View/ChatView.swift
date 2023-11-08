@@ -11,6 +11,8 @@ struct ChatView: View {
     @State var message = ""
     @State var user : User
     @State var messageList = [Message]()
+    @StateObject var viewModel = ChatViewModel()
+
     init(user:User) {
         self.user = user
     }
@@ -31,7 +33,11 @@ struct ChatView: View {
                             .multilineTextAlignment(.leading)
                     Button(action: {
                         if message != ""{
-                            messageList.append(Message(id: UUID().uuidString, message:message, user: user.id))
+                            let sendedMessage = Message(id: UUID().uuidString, message:message, user:user.id)
+                            messageList.append(sendedMessage)
+                            Task{
+                                viewModel.checkChat(user:user)
+                            }
                             message = ""
                         }
                        

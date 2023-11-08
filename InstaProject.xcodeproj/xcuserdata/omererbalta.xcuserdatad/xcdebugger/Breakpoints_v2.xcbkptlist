@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "6822B547-DE69-48E7-9EF6-BE307F5F9A82"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4735900E-6658-40C7-99BE-5E524FCA4C2C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "InstaProject/Core/Feed/ViewModel/CommentViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "CommentViewModel"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "4735900E-6658-40C7-99BE-5E524FCA4C2C - c6842f0a39e3804a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "InstaProject.CommentViewModel.addComment(post: InstaProject.Post, commentString: Swift.String) async throws -&gt; ()"
+                  moduleName = "InstaProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/omererbalta/Desktop/Swift/InstaProject/InstaProject/Core/Feed/ViewModel/CommentViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "108">
+               </Location>
+               <Location
+                  uuid = "4735900E-6658-40C7-99BE-5E524FCA4C2C - ec3161a5b7014e3e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for InstaProject.CommentViewModel.addComment(post: InstaProject.Post, commentString: Swift.String) async throws -&gt; ()"
+                  moduleName = "InstaProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/omererbalta/Desktop/Swift/InstaProject/InstaProject/Core/Feed/ViewModel/CommentViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "164">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     var user : User
+    @EnvironmentObject var viewSwitch: ViewSwitch
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -16,6 +17,7 @@ struct ProfileView: View {
                     
                     //header
                     ProfileHeaderView(user: user)
+                        .environmentObject(viewSwitch)
                     
                     Divider()
                     

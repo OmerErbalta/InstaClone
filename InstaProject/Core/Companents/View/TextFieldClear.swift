@@ -16,10 +16,10 @@ struct TextFieldClear: ViewModifier {
             if !text.isEmpty {
                 Button(
                     action: {
-                        
+                        text = ""
                     },
                     label: {
-                        Image(systemName: "paperplane")
+                        Image(systemName: "delete.left.fill")
                             .foregroundColor(Color(UIColor.opaqueSeparator))
                     }
                 )

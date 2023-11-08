@@ -34,6 +34,7 @@ class CommentViewModel:ObservableObject{
     func addComment(post:Post,commentString:String) async throws {
          let userId = AuthService.shared.currentUser?.id
         let commentRef = Firestore.firestore().collection("posts").document(post.id).collection("comment").document()
+    
         let comment = Comment(id: commentRef.documentID, comment: commentString, timeStap: Timestamp(), userId: userId ?? "")
         guard let encoderComment = try? Firestore.Encoder().encode(comment) else{return}
         try await commentRef.setData(encoderComment)
