@@ -21,10 +21,15 @@ class MessageBoxViewModel : ObservableObject{
         guard let currentUser = AuthService.shared.currentUser else{return}
         if let chatListId = currentUser.chatListId{
             for i in 0..<(chatListId.count){
+                var chat :Chat
               let snapShot = try await Firestore.firestore().collection("chat").document(chatListId[i]).getDocument()
-                self.chatList.append(try snapShot.data(as: Chat.self))
+                chat = try snapShot.data(as: Chat.self)
+                let messageSnapshot = try await Firestore.firestore().collection("chat").document(chat.id).collection("messages").getDocuments()
+                chat.messages = try messageSnapshot.documents.compactMap({try $0.data(as: Message.self)})
+                self.chatList.append(chat)
             }
         }
+        
         try await addedUsersChat(currentUser: currentUser)
     }
     

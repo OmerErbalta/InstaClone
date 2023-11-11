@@ -29,6 +29,8 @@ struct MessageBoxCell: View {
                 Text(user.username)
                     .font(.subheadline)
                     .fontWeight(.semibold)
+                Text(chat.messages?.last?.message ?? "")
+                    .opacity(0.4)
                 
             }
             .foregroundStyle(.black)

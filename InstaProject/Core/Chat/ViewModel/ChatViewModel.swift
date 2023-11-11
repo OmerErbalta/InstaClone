@@ -14,7 +14,7 @@ import SwiftUI
 class ChatViewModel : ObservableObject{
     @Published var chat : Chat?
     
-
+  
    
     func sendToMessage(user:User,message:String)async throws{
         print("send to message")

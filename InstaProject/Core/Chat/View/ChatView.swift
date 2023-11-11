@@ -17,15 +17,12 @@ struct ChatView: View {
     init(user:User,chat:Chat) {
         self.user = user
         self.chat = chat
-        Task{
-            
-        }
     }
     var body: some View {
         NavigationStack {
             VStack{
                 ScrollView{
-                    ForEach(messageList ,id: \.id){message in
+                    ForEach(chat.messages ?? [] ,id: \.id){message in
                         ChatMessage(message: message, messageType: .myMessage)
                        
                     }
