@@ -9,23 +9,26 @@ import SwiftUI
 import Kingfisher
 
 struct MessageBoxCell: View {
-    var user = User.MOCK_USER[2]
+    var chat:Chat
+    var user = User.MOCK_USER[0]
+    init(chat:Chat) {
+        self.chat = chat
+        if let user = chat.user{
+            self.user = user
+            print(user.username)
+        }
+    }
     var body: some View {
         
         NavigationLink{
-            ChatView(user: user)
+            ChatView(user: user,chat:chat)
             
         }label: {
-            Image("personImage")
-                .resizable()
-                .frame(width: 70,height: 70)
+            CircleProfileImage(user: user, size: .xsmall)
             VStack(alignment:.leading) {
                 Text(user.username)
                     .font(.subheadline)
                     .fontWeight(.semibold)
-                Text("Last message bla bla bla bla bla bla")
-                    .font(.callout)
-                    .opacity(0.4)
                 
             }
             .foregroundStyle(.black)
@@ -40,5 +43,5 @@ struct MessageBoxCell: View {
     }
 }
 #Preview {
-    MessageBoxCell()
+    MessageBoxCell(chat: Chat(id: "", usersId: []))
 }

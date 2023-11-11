@@ -9,13 +9,12 @@ import SwiftUI
 
 struct MessageBoxView: View {
     @EnvironmentObject var viewSwitch: ViewSwitch
+    @StateObject var viewModel = MessageBoxViewModel()
     var body: some View {
-        //
-        
         NavigationStack{
                 ScrollView{
-                    ForEach (0..<10 ){ i in
-                        MessageBoxCell()
+                    ForEach (viewModel.chatList ){ chat in
+                        MessageBoxCell(chat:chat)
                         Divider()
                     }
                 }

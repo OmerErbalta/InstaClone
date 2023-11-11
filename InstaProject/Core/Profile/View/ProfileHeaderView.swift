@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ProfileHeaderView: View {
     let user : User
+    @State var messageBoxViewModel = MessageBoxViewModel()
     @EnvironmentObject var viewSwitch: ViewSwitch
     @State var showEditProfile = false
       var  postCount = 0
@@ -32,9 +33,7 @@ struct ProfileHeaderView: View {
                 UserStatView(value: user.fallower?.count  ?? 0, title: "Followers")
                 UserStatView(value: user.fallowing?.count ?? 0, title: "Following")
                 
-            }
-            
-            
+            }            
             //name and bio
             VStack(alignment:.leading){
                 Text(user.username).font(.subheadline).fontWeight(.bold)
@@ -72,7 +71,8 @@ struct ProfileHeaderView: View {
                         .stroke(userType == .UserView ? .gray : .clear ,lineWidth: 1))
                 if userType == .OthherProfileView{
                     NavigationLink {
-                        ChatView(user:self.user)
+                       
+                        ChatView(user:self.user, chat: messageBoxViewModel.getChatFromUserId(user: user))
                     }label: {
                         Text("Mesaj")
                     }

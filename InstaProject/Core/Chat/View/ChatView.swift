@@ -10,11 +10,16 @@ import Firebase
 struct ChatView: View {
     @State var message = ""
     @State var user : User
+    @State var chat :Chat
     @State var messageList = [Message]()
     @StateObject var viewModel = ChatViewModel()
 
-    init(user:User) {
+    init(user:User,chat:Chat) {
         self.user = user
+        self.chat = chat
+        Task{
+            
+        }
     }
     var body: some View {
         NavigationStack {
@@ -83,6 +88,6 @@ struct ChatView: View {
 }
 
 #Preview {
-    ChatView(user: User.MOCK_USER[1])
+    ChatView(user: User.MOCK_USER[1], chat: Chat(id: "", usersId: []))
 }
 

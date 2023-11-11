@@ -12,7 +12,7 @@ struct Chat : Identifiable,Codable{
     let id :String
     var messages : [Message]?
     let usersId : [String]?
-    var users:[User]?
+    var user:User?
 }
 
 struct Message:Identifiable,Codable {

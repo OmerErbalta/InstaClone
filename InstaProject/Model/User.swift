@@ -25,9 +25,9 @@ struct User:Identifiable,Codable{
 }
 extension User{
     static var MOCK_USER : [User] = [
-        .init(id: UUID().uuidString, email: "Hata@gmail.com", username: "UserNameHata", password: "hata",profileImageUrl: nil,fullName: "HATA..", bio: "Hata..")
+        .init(id: UUID().uuidString, email: "", username: "", password: "",profileImageUrl: "",fullName: "",bio: "")
         ,
-        .init(id: UUID().uuidString, email: "Mert@gmail.com", username: "mertAlp", password: "mert123",profileImageUrl: "superman",fullName: "Mert Alp",bio: "Ios Developer")
+        .init(id: UUID().uuidString, email: "Hata@gmail.com", username: "UserNameHata", password: "hata",profileImageUrl: nil,fullName: "HATA..", bio: "Hata..")
         ,
         .init(id: UUID().uuidString, email: "selim@gmail.com", username: "selimEvrenErbalta", password: "selim123",profileImageUrl: "brim",fullName: "Selim Eren Erbalta", bio: "Pro Gamer")
         ,

@@ -10,7 +10,10 @@ import SwiftUI
 struct FeedView: View {
     @StateObject var viewModel = FeedViewModel()
     @EnvironmentObject var viewSwitch: ViewSwitch
-
+    @StateObject var messageBoxViewModel = MessageBoxViewModel()
+    
+    init() {
+    }
     var body: some View {
         NavigationStack {
             ScrollView{

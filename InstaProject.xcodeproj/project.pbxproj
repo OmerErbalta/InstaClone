@@ -53,6 +53,7 @@
 		5C78D4212AE93E620047A76F /* SerachViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78D4202AE93E620047A76F /* SerachViewModel.swift */; };
 		5C78D4232AE96BA00047A76F /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78D4222AE96BA00047A76F /* EditProfileView.swift */; };
 		5C8087252AFBA40C008F3D79 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8087242AFBA40C008F3D79 /* ChatViewModel.swift */; };
+		5C8087272AFBD72D008F3D79 /* MessageBoxViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8087262AFBD72D008F3D79 /* MessageBoxViewModel.swift */; };
 		5C84CE262AEA9FA800A5DCD9 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C84CE252AEA9FA800A5DCD9 /* FeedViewModel.swift */; };
 		5C8B41572AE7FD2100261018 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8B41562AE7FD2100261018 /* LoginViewModel.swift */; };
 		5C8D4DC92AF2AB6000147B84 /* ExtencionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8D4DC82AF2AB6000147B84 /* ExtencionClass.swift */; };
@@ -130,6 +131,7 @@
 		5C78D4202AE93E620047A76F /* SerachViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerachViewModel.swift; sourceTree = "<group>"; };
 		5C78D4222AE96BA00047A76F /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		5C8087242AFBA40C008F3D79 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		5C8087262AFBD72D008F3D79 /* MessageBoxViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBoxViewModel.swift; sourceTree = "<group>"; };
 		5C84CE252AEA9FA800A5DCD9 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		5C8B41562AE7FD2100261018 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		5C8D4DC82AF2AB6000147B84 /* ExtencionClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtencionClass.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 		5C14F8B22AE4FA18000BE265 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				5C2D16682AF91BDF005A38AA /* Chat */,
 				5C376E202AF8C3C900843E08 /* MessageBox */,
 				5C14F8C42AE51109000BE265 /* Companents */,
 				5C14F8BC2AE4FB25000BE265 /* UploadPost */,
@@ -424,9 +427,8 @@
 		5C376E202AF8C3C900843E08 /* MessageBox */ = {
 			isa = PBXGroup;
 			children = (
-				5C2D16682AF91BDF005A38AA /* Chat */,
-				5C376E232AF8C3F100843E08 /* MessageBoxView.swift */,
-				5C2D166B2AF91C53005A38AA /* MessageBoxCell.swift */,
+				5C8087292AFBD740008F3D79 /* ViewModel */,
+				5C8087282AFBD737008F3D79 /* View */,
 			);
 			path = MessageBox;
 			sourceTree = "<group>";
@@ -459,6 +461,23 @@
 			isa = PBXGroup;
 			children = (
 				5C8087242AFBA40C008F3D79 /* ChatViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		5C8087282AFBD737008F3D79 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5C2D166B2AF91C53005A38AA /* MessageBoxCell.swift */,
+				5C376E232AF8C3F100843E08 /* MessageBoxView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5C8087292AFBD740008F3D79 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5C8087262AFBD72D008F3D79 /* MessageBoxViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -679,6 +698,7 @@
 				5C14F88A2AE4FA0A000BE265 /* ContentView.swift in Sources */,
 				5C14F8BE2AE4FB8B000BE265 /* MainTabView.swift in Sources */,
 				5C376E242AF8C3F100843E08 /* MessageBoxView.swift in Sources */,
+				5C8087272AFBD72D008F3D79 /* MessageBoxViewModel.swift in Sources */,
 				5C14F8D22AE56096000BE265 /* IGTextFieldModifier.swift in Sources */,
 				5C14F8DE2AE6BEEA000BE265 /* PostGridView.swift in Sources */,
 				5C14F8882AE4FA0A000BE265 /* InstaProjectApp.swift in Sources */,
